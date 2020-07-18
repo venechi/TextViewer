@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="mainWindow" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="textviewer.Controller">
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="메뉴">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="파일 열기" />
+              <MenuItem mnemonicParsing="false" text="설정" />
+                  <MenuItem mnemonicParsing="false" text="프로그램 정보" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="책갈피">
+              <items>
+                <MenuItem mnemonicParsing="false" text="현재 페이지에 책갈피 추가" />
+                  <MenuItem mnemonicParsing="false" text="모든 책갈피 삭제" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
+         <items>
+            <TextFlow fx:id="textLeft" onMouseClicked="#prevPage" />
+            <TextFlow fx:id="textRight" onMouseClicked="#nextPage" />
+         </items>
+      </SplitPane>
+   </center>
+</BorderPane>
