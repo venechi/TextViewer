@@ -36,8 +36,10 @@ public class Model {
     }
 
     public void setCurrentPage(int currentPage) {
-        if (currentPage >= 0 && currentPage <= totalPages)
+        if (currentPage >= 0 && currentPage <= totalPages) {
             this.currentPage = currentPage;
+            updatePages();
+        }
     }
 
     public Settings getSettings() {
@@ -57,7 +59,7 @@ public class Model {
             }
             try {
                 Scanner scanner = new Scanner(currentFile);
-                rawData = new ArrayList<Text>();
+                rawData = new ArrayList<>();
                 while (scanner.hasNextLine()) {
                     Text line = new Text(scanner.nextLine() + "\n");
                     line.setFont(settings.getFont());
@@ -91,8 +93,8 @@ public class Model {
     }
 
     public void setTextWindowHeight(int textWindowHeight) {
-        this.textWindowHeight = textWindowHeight - (settings.getPadding() * 2);
-        if (currentFile != null) {
+        this.textWindowHeight = textWindowHeight - (getSettings().getPadding() * 2);
+        if (getCurrentFile() != null) {
             Integer currentLine = leftPage.get(0).getValue();
             updatePageMetadata();
             int newLine = lines.indexOf(lines.stream().filter(line -> line.getValue().equals(currentLine)).findFirst().get());
@@ -106,7 +108,7 @@ public class Model {
 
     private void updatePageMetadata() {
         Text toMeasureSize = new Text();
-        toMeasureSize.setFont(settings.getFont());
+        toMeasureSize.setFont(getSettings().getFont());
         linesPerPage = (int) Math.floor(
                 (textWindowHeight - toMeasureSize.getLayoutBounds().getHeight())
                         / (toMeasureSize.getLayoutBounds().getHeight() + settings.getLineSpacing())
@@ -148,7 +150,7 @@ public class Model {
         }
 
         try {
-            serializeObjectAndSaveToFile(Constants.SETTING_FILE_PATH, settings);
+            serializeObjectAndSaveToFile(Constants.SETTING_FILE_PATH, getSettings());
         } catch (IOException e) {
             showAlert("설정 저장 에러", null, "설정을 저장할 수 없습니다");
         }
@@ -243,29 +245,35 @@ public class Model {
     }
 
     public void updatePages() {
-        leftPage = getPage(currentPage);
-        rightPage = getPage(currentPage + 1);
+        leftPage = getPage(getCurrentPage());
+        rightPage = getPage(getCurrentPage() + 1);
     }
 
-    public void nextPage() {
-        if (currentFile != null) {
-            if (currentPage + 1 < totalPages) {
-                currentPage += 2;
+    public boolean nextPage() {
+        if (getCurrentFile() == null) {
+            return false;
+        } else {
+            if (getCurrentPage() + 1 < getTotalPages()) {
+                setCurrentPage(getCurrentPage() + 2);
                 updatePages();
             } else {
                 showAlert("마지막 페이지입니다", null, "마지막 페이지입니다");
             }
+            return true;
         }
     }
 
-    public void prevPage() {
-        if (currentFile != null) {
+    public boolean prevPage() {
+        if (getCurrentFile() == null) {
+            return false;
+        } else {
             if (currentPage > 0) {
-                currentPage -= 2;
+                setCurrentPage(getCurrentPage() - 2);
                 updatePages();
             } else {
                 showAlert("첫번째 페이지입니다", null, "첫번째 페이지입니다");
             }
+            return true;
         }
     }
 

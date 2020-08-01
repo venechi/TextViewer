@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="mainWindow" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="textviewer.Controller">
-   <top>
-      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="메뉴">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="파일 열기" />
-              <MenuItem mnemonicParsing="false" text="설정" />
-                  <MenuItem mnemonicParsing="false" text="프로그램 정보" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="책갈피">
-              <items>
-                <MenuItem mnemonicParsing="false" text="현재 페이지에 책갈피 추가" />
-                  <MenuItem mnemonicParsing="false" text="모든 책갈피 삭제" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-   </top>
+<BorderPane fx:id="mainWindow" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="textviewer.Controller">
    <center>
       <SplitPane dividerPositions="0.5" BorderPane.alignment="CENTER">
          <items>
@@ -33,4 +14,40 @@
          </items>
       </SplitPane>
    </center>
+   <top>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="menuBar">
+              <menus>
+                <Menu mnemonicParsing="false" text="메뉴">
+                  <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openFile" text="파일 열기" />
+                    <MenuItem fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettingsMenu" text="설정" />
+                        <MenuItem mnemonicParsing="false" text="프로그램 정보" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="책갈피">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="현재 페이지에 책갈피 추가" />
+                        <MenuItem mnemonicParsing="false" text="모든 책갈피 삭제" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+            <Spinner fx:id="currentPage" editable="true" focusTraversable="false" />
+            <Label fx:id="totalPage" text=" / 0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

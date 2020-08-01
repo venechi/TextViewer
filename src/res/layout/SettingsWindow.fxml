@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <Label text="글자색">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <ColorPicker prefWidth="200.0" />
+            <Label text="글꼴">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <ChoiceBox prefWidth="200.0" />
+            <Label text="글자 크기">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Spinner prefWidth="200.0" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <Label text="배경색">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <ColorPicker prefWidth="200.0" />
+            <Label text="페이지 여백">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Label>
+            <Spinner prefWidth="200.0" />
+            <HBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="적용">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <Button mnemonicParsing="false" text="취소">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>
