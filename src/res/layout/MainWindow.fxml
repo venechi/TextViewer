@@ -22,7 +22,7 @@
                 <Menu mnemonicParsing="false" text="메뉴">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#openFile" text="파일 열기" />
-                    <MenuItem fx:id="settingsMenu" mnemonicParsing="false" onAction="#openSettingsMenu" text="설정" />
+                    <MenuItem mnemonicParsing="false" onAction="#openSettingsMenu" text="설정" />
                         <MenuItem mnemonicParsing="false" text="프로그램 정보" />
                   </items>
                 </Menu>
@@ -47,6 +47,7 @@
                   <Insets />
                </opaqueInsets>
             </Label>
+            <Button fx:id="changePage" mnemonicParsing="false" text="페이지 이동" />
          </children>
       </HBox>
    </top>

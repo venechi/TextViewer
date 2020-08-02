@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Model {
     private Settings settings = null;
+    private static Model model = null;
 
     private ArrayList<BookMark> bookMarks = null;
     private ArrayList<Text> rawData = null;
@@ -50,6 +51,15 @@ public class Model {
         return currentFile;
     }
 
+    private Model() {}
+
+    public static Model getModelInstance() {
+        if(model == null){
+            model = new Model();
+        }
+        return model;
+    }
+
     public void setCurrentFile(File currentFile) {
         if (currentFile != null) {
             this.currentFile = currentFile;
@@ -63,6 +73,8 @@ public class Model {
                 while (scanner.hasNextLine()) {
                     Text line = new Text(scanner.nextLine() + "\n");
                     line.setFont(settings.getFont());
+                    line.setFill(settings.getCharColor());
+                    line.setLineSpacing(settings.getLineSpacing());
                     rawData.add(line);
                 }
                 scanner.close();
@@ -98,7 +110,7 @@ public class Model {
             Integer currentLine = leftPage.get(0).getValue();
             updatePageMetadata();
             int newLine = lines.indexOf(lines.stream().filter(line -> line.getValue().equals(currentLine)).findFirst().get());
-            int page = (int) Math.floor(newLine / linesPerPage);
+            int page = (int) Math.floor((float)newLine / linesPerPage);
             if (page % 2 == 1)
                 --page;
             setCurrentPage(page);
@@ -188,7 +200,7 @@ public class Model {
     private ArrayList<Text> splitLine(Text original) {
         int pivot;
         double dividend;
-        ArrayList<Text> result = new ArrayList<Text>();
+        ArrayList<Text> result = new ArrayList<>();
         String string = original.getText();
         Text t = new Text(string);
         t.setFont(settings.getFont());
@@ -216,14 +228,14 @@ public class Model {
     private void trimLines() {
         if (rawData == null)
             return;
-        lines = new ArrayList<Pair<Text, Integer>>();
+        lines = new ArrayList<>();
         for (int i = 0; i < rawData.size(); ++i) {
             Text text = rawData.get(i);
             if (text.getLayoutBounds().getWidth() <= textWindowWidth) {
-                lines.add(new Pair<Text, Integer>(text, i));
+                lines.add(new Pair<>(text, i));
             } else {
                 for (Text t : splitLine(text))
-                    lines.add(new Pair<Text, Integer>(t, i));
+                    lines.add(new Pair<>(t, i));
             }
         }
     }
@@ -232,15 +244,15 @@ public class Model {
         ArrayList<Pair<Text, Integer>> page;
         if (lines != null && pageNum >= 0 && pageNum <= totalPages) {
             if (linesPerPage * (pageNum + 1) - 1 < lines.size()) {
-                page = new ArrayList<Pair<Text, Integer>>(lines.subList(
+                page = new ArrayList<>(lines.subList(
                         linesPerPage * pageNum, linesPerPage * (pageNum + 1)
                 ));
             } else {
-                page = new ArrayList<Pair<Text, Integer>>(lines.subList(
+                page = new ArrayList<>(lines.subList(
                         linesPerPage * pageNum, lines.size()));
             }
         } else
-            page = new ArrayList<Pair<Text, Integer>>();
+            page = new ArrayList<>();
         return page;
     }
 
@@ -282,6 +294,6 @@ public class Model {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
-        alert.showAndWait();
+        alert.show();
     }
 }
